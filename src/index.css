@@ -126,3 +126,8 @@ img.medium{
   color:#f0c040;
   margin:0.1rem
 }
+
+/* we are using rating class span last elemt i.e last child and changing its color to bloack */
+.rating span:last-child{
+  color:#404040
+}
