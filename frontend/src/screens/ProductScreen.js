@@ -17,7 +17,7 @@ export default function ProductScreen(props) {
     }
     return (
         <div>
-            <Link to="/">Back To Home</Link> 
+            <Link to="/">Back To Home</Link>
             <div className="row top">
                 <div className="col-2">
                     <img className="large" src={product.image} alt={product.name} />
@@ -56,7 +56,7 @@ export default function ProductScreen(props) {
                                             <span className="success">In Stock</span>
                                         ) :
                                             (
-                                                <span className="error">Unavaiable</span >
+                                                <span className="danger">Unavaiable</span >
                                             )}
                                     </div>
                                 </div>
