@@ -1,3 +1,7 @@
 WE HAVE SET THE PROXY IN PACKAGE.JSON 
 SO WE HAVE TO RESTART THE BOTH THE TERMINALS
 AND FIRST RUN BACKEND THEN RUIN FRONTEND
+
+we have installed eslint from exetensions 
+it helps us to find the error suppose u use data1 not not used it any where then it will give underline in that part and give us error
+if we define a variable we are not using in code then we will get highlight that u have not used it
