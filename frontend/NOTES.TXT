@@ -5,3 +5,18 @@ AND FIRST RUN BACKEND THEN RUIN FRONTEND
 we have installed eslint from exetensions 
 it helps us to find the error suppose u use data1 not not used it any where then it will give underline in that part and give us error
 if we define a variable we are not using in code then we will get highlight that u have not used it
+
+redux is use to manage the state of our application
+workflow of redux 
+view -->we are using the component 
+PRVIOUSLY WE HAVE SENT THE AJAX REQUEST TO BACKEND TO GET THE LIST OF PRODUCTS
+IN REDUX WE ARE GOING TO GET PRODUCTS FROM BACKEND AND PUT THEM IN REDUX STATE INSTEAD OF COMPONNET STATE
+IT WILL START IN THIS WAY-->
+DISPTACH ACTION IN VIEW PART
+THIS ACTION SENT REQUEST TO REDUX STORE TO MAKE CHANGE IN STATE OF OUR application
+SO TO REQUEST STATE CHANGE WE NEED TO CREATE AN ACTION AND HAVE TO DISPATCH THE ACTION
+IN STORE OF REDUX WE HAVE TWO THINGS STATE AND REDUCER
+STATE IS CURRENT STATE OF OUR APPLICATION 
+AND REDUCER IS FUNCTION IS THAT GET CURRENT STATE AND MAKE CHANGE IN STATE AND RETURN THE NEW STATTE
+BY HAVING HISTORY OF STATE WE CAN WHETHER MANAGE AND PREDICT THE STATE OF OUR APLICATION AND THERE IS NO UNPREDICATABLE STATUS IN OUR CODE
+ can refer to redux workflow picture for more clarification
