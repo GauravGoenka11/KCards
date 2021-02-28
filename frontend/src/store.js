@@ -3,17 +3,26 @@
 // initial state and reducer
 
 //this redux store it just return list of products in data.js in frontend
-import data from "./data";
-import { applyMiddleware, compose, createStore } from 'redux';
+//import data from "./data";
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { productListReducer } from "./reducers/productReducer";
 
-
+//DEFINING INITAIL STATE
 const initialState = {};
-// reducer accept two parameter state and action 
-const reducer = (state, action) => {
-    //return new state i.e products from data.products and import data
-    return { products: data.products };
-};
+
+// reducer accept two parameter state and action
+ //we are updating the reducer instead of having static product from frontend we will use combine reducers
+ //so we are commenting this part that is removing the below part
+// const reducer = (state, action) => {
+//     //return new state i.e products from data.products and import data
+//     return { products: data.products };
+// };
+
+const reducer = combineReducers({
+ productList:productListReducer,
+});
+
 
 //adding redux chrome devloper tool we need to update compose function
 //so for that we are defining composeEnhancer
@@ -26,10 +35,12 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //we are dleteing below line because we are adding redux thunk to it
 //const store=createStore(reducer,initialState);
 
-//to see the redux store in chrome browser we have to search reacyt dev tools and install the the extension of redux dev tools
+//to see the redux store in chrome browser we have to search react dev tools and install the the extension of redux dev tools
 // after that right click and inspect and go to redux tab
 // there you will see no store found so for that we have to add some code to that
 //we have to install npm i redux-thunk "REDUX THUNK MAKE IT POSSIBLE TO SEND AJAX REQUEST IN OUR REDUX ACTION"
+
+//now we are adding 3rd parameter for thunk
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)));
 //we have change compose to compose Enchancer 
 //after that reload the page then u will not see no store found

@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+
+//we are not using this now so commented the axios as we are using dispatch
 // we are importing this product and data bcz we have used it home screen
 //we are using .. bcz homescreen is screen folder but product and data are in src so we have to go to folder back
-import axios from 'axios';
+//import axios from 'axios';
 
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../actions/productActions';
+
 //here we have imported the data.js for dyamically display of data 
 
 
@@ -17,16 +22,39 @@ import MessageBox from '../components/MessageBox';
 //BY GOING TO INSPECT-->NETWORK-->NAME-->PRODUCTS THEN WE CAN SEE ALL THE PRODUCTS
 
 export default function HomeScreen() {
+
+    //   we are not using the below react hooks beacuse we are doing that bu redux useselector
+    //  get rid of all hooks 
+
     // define react hook for state we have to also import usestate
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
     //WE HAVE GOING TO CREATE THE HOOK FOR LOADING THE PAGE
     //we have set default as false because by default we are not laoding
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
     //hook for error
     //by default error is false because there is no error
-    const [error, setError] = useState(false);
+    // const [error, setError] = useState(false);
+
+
+
+    //  get product list from redux store
+    //we using disptach =usedispatch is function in 
+    //react redux we can dipatch any redux action inside react component 
+    const dispatch = useDispatch();
+    //  to get an object from redux store we have to use useselector it is function in react redux
+    //  use selector accept a function that has redux state as parameter 
+    // from this parameter we just need to get the only the product list
+
+    const productList = useSelector((state) => state.productList);
+    //getting free value from product list 
+    const { loading, error, products } = productList;
+
+    useEffect(() => {
+        //dispatch the action is listproduct
+        dispatch(listProducts());
+    }, []);
 
     //     to fill the product we will useeffect function 
     //    useeffect is another hook that happen when component did mount to our webpage i.e after rendering the component its function will run
@@ -36,43 +64,46 @@ export default function HomeScreen() {
     //after rendering the component the useeffect function run only once that what we excatly want
     //in this function what we are going to do is that send that ajax request to backend and fetch product from there
     //to sent the ajax request we are going to define the  function to fetch data
-    useEffect(() => {
-        // this function is async function bcz ajax request is async operation
-        const fetchData = async () => {
+
+    //we are using the above useeffect because we are using the useselector so we dont need to fetch the data
+
+    // useEffect(() => {
+    //     // this function is async function bcz ajax request is async operation
+    //     const fetchData = async () => {
 
 
-            //to catch the error we are wrapping the ajax request inside try catch block
-            try {
-                //use setloading before sending the ajax request and set it to true
-                setLoading(true);
-                //fetch data from axios request put await before axios and called get method of axios and address of api
-                //by running below line  this the array in backend will be transform to data in frontend
-                //the below line is ajax request
-                const { data } = await axios.get('/api/products');
+    //         //to catch the error we are wrapping the ajax request inside try catch block
+    //         try {
+    //             //use setloading before sending the ajax request and set it to true
+    //             setLoading(true);
+    //             //fetch data from axios request put await before axios and called get method of axios and address of api
+    //             //by running below line  this the array in backend will be transform to data in frontend
+    //             //the below line is ajax request
+    //             const { data } = await axios.get('/api/products');
 
-                //after loading set it to false
-                setLoading(false);
+    //             //after loading set it to false
+    //             setLoading(false);
 
-                //setting products to data that we are getting from backend
-                setProducts(data);
-            }
-            catch (err) {
-                //get the error as parameter
-                //and seterror to err.message 
-                //also loading as false bcz we dont have to show loading any more
-                setError(err.message);
-                setLoading(false);
-            }
-        };
-        //    to make function work we have to call the fetchData function
-        fetchData();
-    }, [])
+    //             //setting products to data that we are getting from backend
+    //             setProducts(data);
+    //         }
+    //         catch (err) {
+    //             //get the error as parameter
+    //             //and seterror to err.message 
+    //             //also loading as false bcz we dont have to show loading any more
+    //             setError(err.message);
+    //             setLoading(false);
+    //         }
+    //     };
+    //     //    to make function work we have to call the fetchData function
+    //     fetchData();
+    // }, [])
 
 
 
     return (
         <div>
-{/* before rendering list of product i will checkloading
+            {/* before rendering list of product i will checkloading
  if loading is true then render Loading Box component
 otherwise error  if error exist then render Mesaage box componet and inside message box we will show the eror
 otherwise if there is no loading and no error it time to render the product then load the product so we have put the below code in there part of if else */}
